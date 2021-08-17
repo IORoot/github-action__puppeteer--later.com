@@ -1,0 +1,14 @@
+{
+    "name": "prunner",
+    "version": "1.0.0",
+    "author": "Andy Pearson (https://ioroot.com)",
+    "description": "Allows you to run puppeteer scripts.",
+    "license": "MIT",
+    "main": "puppeteer.js",
+    "dependencies": {
+        "puppeteer-core": "^5.4.1"
+    },
+    "scripts": {
+        "start": "node puppeteer.js"
+    }
+}
