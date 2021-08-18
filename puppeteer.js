@@ -83,6 +83,9 @@ var runner = (function () {
             console.log('browser version:' + version);
 
 
+            /**
+             * Change User-Agent
+             */
             try {
                 console.log('Changing user-agent');
                 await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36');
@@ -91,6 +94,9 @@ var runner = (function () {
                 return;
             }
 
+            /**
+             * Login
+             */
             try {
                 console.log('Navigating to page');
                 await page.goto('https://app.later.com/user/login', { waitUntil: "networkidle2" });
@@ -107,8 +113,8 @@ var runner = (function () {
                 console.log('type into #ember7 (password)');
                 await page.type('#ember7', password);
 
-                console.log('screenshot1');
-                await page.screenshot({path: './screenshot1.png', fullPage: true});
+                console.log('screenshot_login');
+                await page.screenshot({path: './screenshot_login.png', fullPage: true});
 
                 console.log('click login button');
                 await page.click('.qa--login__btn');
@@ -119,6 +125,10 @@ var runner = (function () {
                 return;
             }
 
+
+            /**
+             * Upload Media
+             */
             try {
                 console.log('click upload button');
                 await page.click('.cUP--upload__text.is--base');
@@ -127,8 +137,9 @@ var runner = (function () {
                 return;
             }
 
-            console.log('screenshot2');
-            await page.screenshot({path: './screenshot2.png', fullPage: true});
+
+            console.log('screenshot_upload');
+            await page.screenshot({path: './screenshot_upload.png', fullPage: true});
             
             await browser.close();
         
