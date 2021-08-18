@@ -9,6 +9,8 @@ var runner = (function () {
     }
     let browser;
     let page;
+    let username;
+    let password;
 
     // ┌──────────────────────────────────────────────────────────┐
     // │                                                          │
@@ -17,9 +19,9 @@ var runner = (function () {
     // └──────────────────────────────────────────────────────────┘
 
     function publicSetArguments(arguments){
-        let username = arguments[0];
+        username = arguments[0];
         console.log('Username: ', username);
-        let password = arguments[1];
+        password = arguments[1];
     }
 
     // ┌──────────────────────────────────────────────────────────┐
