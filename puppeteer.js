@@ -77,8 +77,8 @@ var runner = (function () {
             console.log('before user-agent:' + agent);
             // await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36');
             await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36');
-            let agent = await page.browser().userAgent();
-            console.log('after user-agent:' + agent);
+            let agenttwo = await page.browser().userAgent();
+            console.log('after user-agent:' + agenttwo);
 
 
             console.log('goto page');
