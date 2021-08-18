@@ -109,5 +109,5 @@ var runner = (function () {
 module.exports = { runner };
 
 
-runner.args(process.argv.slice(2));s
+runner.args(process.argv.slice(2));
 runner.run();
