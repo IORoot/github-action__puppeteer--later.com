@@ -69,6 +69,9 @@ var runner = (function () {
                 return;
             } 
             
+            const version = await page.browser().version();
+            console.log('browser veerion:' + version);
+
             console.log('goto page');
             await page.goto('https://app.later.com/user/login', { waitUntil: "networkidle2" });
 
