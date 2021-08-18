@@ -70,25 +70,27 @@ var runner = (function () {
             } 
             
             await page.goto('https://app.later.com/user/login', { waitUntil: "networkidle2" });
+
+            await page.screenshot({path: './screenshot.png', fullPage: true});
             
-            await page.waitForSelector('#ember6')
-            await page.click('#ember6')
+            await page.waitForSelector('#ember6');
+            await page.click('#ember6');
             
-            await page.waitForNavigation()
+            await page.waitForNavigation();
             
-            await page.type('#ember6', username)
+            await page.type('#ember6', username);
             
-            await page.type('#ember7', password)
+            await page.type('#ember7', password);
             
-            await page.waitForSelector('.ember-application > .ember-view > .tOB--container > .tSU--container:nth-child(2)')
-            await page.click('.ember-application > .ember-view > .tOB--container > .tSU--container:nth-child(2)')
+            await page.waitForSelector('.ember-application > .ember-view > .tOB--container > .tSU--container:nth-child(2)');
+            await page.click('.ember-application > .ember-view > .tOB--container > .tSU--container:nth-child(2)');
             
-            await page.waitForSelector('.tSU--container__row > .tSU--card > .u--p__t__lg > .o--formSubmit > .qa--login__btn')
-            await page.click('.tSU--container__row > .tSU--card > .u--p__t__lg > .o--formSubmit > .qa--login__btn')
+            await page.waitForSelector('.tSU--container__row > .tSU--card > .u--p__t__lg > .o--formSubmit > .qa--login__btn');
+            await page.click('.tSU--container__row > .tSU--card > .u--p__t__lg > .o--formSubmit > .qa--login__btn');
             
-            await page.screenshot({ path: 'screenshot_1.png', fullPage: true })
+            await page.screenshot({ path: 'screenshot_1.png', fullPage: true });
             
-            await browser.close()
+            await browser.close();
         
         })();
 
