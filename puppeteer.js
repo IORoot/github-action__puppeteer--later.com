@@ -99,9 +99,11 @@ var runner = (function () {
             
             console.log('type into #ember7');
             await page.type('#ember7', password);
+
+
             
             console.log('click button');
-            await page.click('.tSU--container__row > input[type=submit]');
+            await page.click('input[type=submit]');
             
             await page.waitForTimeout(10000);
 
