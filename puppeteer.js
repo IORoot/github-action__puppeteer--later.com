@@ -9,8 +9,6 @@ var runner = (function () {
     }
     let browser;
     let page;
-    const navigationPromise = page.waitForNavigation()
-
 
     // ┌──────────────────────────────────────────────────────────┐
     // │                                                          │
@@ -76,7 +74,7 @@ var runner = (function () {
             await page.waitForSelector('#ember6')
             await page.click('#ember6')
             
-            // await page.waitForNavigation()
+            await page.waitForNavigation()
             
             await page.type('#ember6', username)
             
