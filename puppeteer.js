@@ -2,7 +2,7 @@ var runner = (function () {
 
     const puppeteer = require('puppeteer-core');
     let puppeteer_settings = { 
-        headless: true, 
+        headless: false, 
         devtools: false,
         executablePath: "/usr/bin/google-chrome-stable",
         args: ['--no-sandbox']
@@ -70,7 +70,7 @@ var runner = (function () {
             } 
             
             const version = await page.browser().version();
-            console.log('browser veerion:' + version);
+            console.log('browser version:' + version);
 
             console.log('goto page');
             await page.goto('https://app.later.com/user/login', { waitUntil: "networkidle2" });
