@@ -100,15 +100,16 @@ var runner = (function () {
             console.log('type into #ember7');
             await page.type('#ember7', password);
 
+            console.log('screenshot1');
+            await page.screenshot({path: './screenshot1.png', fullPage: true});
 
-            
             console.log('click button');
-            await page.click('input[type=submit]');
+            await page.click('.qa--login__btn');
             
             await page.waitForTimeout(10000);
 
-            console.log('screenshot');
-            await page.screenshot({path: './screenshot.png', fullPage: true});
+            console.log('screenshot2');
+            await page.screenshot({path: './screenshot2.png', fullPage: true});
             
             await browser.close();
         
