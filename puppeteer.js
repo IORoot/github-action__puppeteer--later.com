@@ -33,19 +33,50 @@ var runner = (function () {
 
         (async () => {
 
-            const puppeteer = require('puppeteer');
-            const browser = await puppeteer.launch()
-            const page = await browser.newPage()
-            const navigationPromise = page.waitForNavigation()
+            /**
+             * New puppeteer
+             */
+            try {
+                console.log('Launch Puppeteer');
+                browser = await puppeteer.launch(puppeteer_settings);
+            } catch (err) {
+                console.log('Error launching puppeteer : ' + err);
+                return;
+            } 
+
+
+            /**
+             * New Browser
+             */
+            try {
+                console.log('create browser');
+                const context = browser.defaultBrowserContext();
+            } catch (err) {
+                console.log('Error creating browser : ' + err);
+                return;
+            } 
+
+
             
-            await page.goto('https://app.later.com/user/login')
+            /**
+             * New Page & viewport
+             */
+            try {
+                console.log('create page');
+                page = await browser.newPage();
+                await page.setDefaultNavigationTimeout(10000);
+                await page.setViewport({ width: 1200, height: 800 });
+            } catch (err) {
+                console.log('Error creating page : ' + err);
+                return;
+            } 
             
-            await page.setViewport({ width: 840, height: 850 })
+            await page.goto('https://app.later.com/user/login', { waitUntil: "networkidle2" });
             
             await page.waitForSelector('#ember6')
             await page.click('#ember6')
             
-            await navigationPromise
+            await page.waitForNavigation()
             
             await page.type('#ember6', username)
             

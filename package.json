@@ -6,7 +6,7 @@
     "license": "MIT",
     "main": "puppeteer.js",
     "dependencies": {
-        "puppeteer-core": "^5.4.1"
+        "puppeteer-core": "^10.2.0"
     },
     "scripts": {
         "start": "node puppeteer.js"
