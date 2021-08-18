@@ -1,4 +1,4 @@
-name: Demo puppeteer script
+name: Puppeteer script for Later.com
 
 on:
   workflow_dispatch:
