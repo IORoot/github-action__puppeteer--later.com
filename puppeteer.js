@@ -9,7 +9,20 @@ var runner = (function () {
     }
     let browser;
     let page;
+    const navigationPromise = page.waitForNavigation()
 
+
+    // ┌──────────────────────────────────────────────────────────┐
+    // │                                                          │
+    // │                    Set the Arguments                     │
+    // │                                                          │
+    // └──────────────────────────────────────────────────────────┘
+
+    function publicSetArguments(arguments){
+        let username = arguments[0];
+        console.log('Username: ', username);
+        let password = arguments[1];
+    }
 
     // ┌──────────────────────────────────────────────────────────┐
     // │                                                          │
@@ -20,84 +33,33 @@ var runner = (function () {
 
         (async () => {
 
-
-            /**
-             * New puppeteer
-             */
-            try {
-                console.log('Launch Puppeteer');
-                browser = await puppeteer.launch(puppeteer_settings);
-            } catch (err) {
-                console.log('Error launching puppeteer : ' + err);
-                return;
-            } 
-
-
-            /**
-             * New Browser
-             */
-            try {
-                console.log('create browser');
-                const context = browser.defaultBrowserContext();
-            } catch (err) {
-                console.log('Error creating browser : ' + err);
-                return;
-            } 
-
-
+            const puppeteer = require('puppeteer');
+            const browser = await puppeteer.launch()
+            const page = await browser.newPage()
+            const navigationPromise = page.waitForNavigation()
             
-            /**
-             * New Page & viewport
-             */
-            try {
-                console.log('create page');
-                page = await browser.newPage();
-                await page.setDefaultNavigationTimeout(30000);
-                await page.setViewport({ width: 1200, height: 800 });
-            } catch (err) {
-                console.log('Error creating page : ' + err);
-                return;
-            } 
-
-
-            /**
-             * Visit target Page.
-             */
-            try {
-                console.log('Visiting Target Page');
-                await page.goto('https://www.bbc.co.uk/news', { waitUntil: "networkidle2" });
-                const title = await page.title()
-                console.log(title)
-            } catch (err) {
-                console.log('Error visiting Target Page : ' + err);
-                return;
-            } 
-
-
-            /**
-             * Take full page screenshot.
-             */
-            try {
-                console.log('Taking screenshot');
-                await page.screenshot({path: './screenshot.png', fullPage: true})
-            } catch (err) {
-                console.log('Error taking screenshot : ' + err);
-                return;
-            } 
+            await page.goto('https://app.later.com/user/login')
             
-
-
-            /**
-             * Done
-             */
-            try {
-                console.log('Done');
-                await page.waitForTimeout(1000);
-                await browser.close();
-            } catch (err) { 
-                console.log('Error closing the browser : ' + err);
-                return;
-            }
+            await page.setViewport({ width: 840, height: 850 })
+            
+            await page.waitForSelector('#ember6')
+            await page.click('#ember6')
+            
+            await navigationPromise
+            
+            await page.type('#ember6', username)
+            
+            await page.type('#ember7', password)
+            
+            await page.waitForSelector('.ember-application > .ember-view > .tOB--container > .tSU--container:nth-child(2)')
+            await page.click('.ember-application > .ember-view > .tOB--container > .tSU--container:nth-child(2)')
+            
+            await page.waitForSelector('.tSU--container__row > .tSU--card > .u--p__t__lg > .o--formSubmit > .qa--login__btn')
+            await page.click('.tSU--container__row > .tSU--card > .u--p__t__lg > .o--formSubmit > .qa--login__btn')
+            
+            await page.screenshot({ path: 'screenshot_1.png', fullPage: true })
+            
+            await browser.close()
         
         })();
 
@@ -111,9 +73,12 @@ var runner = (function () {
     // └──────────────────────────────────────────────────────────┘
     return {    
         run: publicRun,
+        args: publicSetArguments
     };
 
 })();
 module.exports = { runner };
 
+
+runner.args(process.argv.slice(2));s
 runner.run();
