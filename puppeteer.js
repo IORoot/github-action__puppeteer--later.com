@@ -2,7 +2,7 @@ var runner = (function () {
 
     const puppeteer = require('puppeteer-core');
     let puppeteer_settings = { 
-        headless: false, 
+        headless: true, 
         devtools: false,
         executablePath: "/usr/bin/google-chrome-stable",
         args: ['--no-sandbox']
