@@ -11,6 +11,7 @@ var runner = (function () {
     let page;
     let username;
     let password;
+    let texturl;
 
     // ┌──────────────────────────────────────────────────────────┐
     // │                                                          │
@@ -21,7 +22,14 @@ var runner = (function () {
     function publicSetArguments(arguments){
         username = arguments[0];
         console.log('Username: ', username);
+
         password = arguments[1];
+
+        imageurl = arguments[2];
+        console.log('Image URL: ', imageurl);
+
+        texturl = arguments[3];
+        console.log('Text URL: ', texturl);
     }
 
     // ┌──────────────────────────────────────────────────────────┐
