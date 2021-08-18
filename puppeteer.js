@@ -92,9 +92,6 @@ var runner = (function () {
             console.log('click #ember6');
             await page.click('#ember6');
             
-            console.log('waitForNavigation');
-            await page.waitForNavigation();
-            
             console.log('type into #ember6');
             await page.type('#ember6', username);
             
