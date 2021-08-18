@@ -100,12 +100,11 @@ var runner = (function () {
             console.log('type into #ember7');
             await page.type('#ember7', password);
             
-            await page.waitForSelector('.ember-application > .ember-view > .tOB--container > .tSU--container:nth-child(2)');
-            await page.click('.ember-application > .ember-view > .tOB--container > .tSU--container:nth-child(2)');
+            console.log('click button');
+            await page.click('.tSU--container__row > input[type=submit]');
             
-            await page.waitForSelector('.tSU--container__row > .tSU--card > .u--p__t__lg > .o--formSubmit > .qa--login__btn');
-            await page.click('.tSU--container__row > .tSU--card > .u--p__t__lg > .o--formSubmit > .qa--login__btn');
-            
+            await page.waitForTimeout(10000);
+
             console.log('screenshot');
             await page.screenshot({path: './screenshot.png', fullPage: true});
             
