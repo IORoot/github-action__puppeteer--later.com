@@ -24,13 +24,14 @@ jobs:
       env:
         RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
       with:
-        args: copy GDrive:${{ env.videofile }} ./
+        args: copy GDrive:${{ env.videofile }} ./${{ env.videofile }}
 
 
     - name: Download Gist Text
       run: |
         # wget ${{ env.videourl }}
         wget ${{ env.texturl }}
+        ls
 
 
     - name: Install
