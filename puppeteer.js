@@ -2,7 +2,7 @@ var runner = (function () {
 
     const puppeteer = require('puppeteer-core');
     let puppeteer_settings = { 
-        headless: false, 
+        headless: true, 
         devtools: false,
         executablePath: "/usr/bin/google-chrome-stable",
         // executablePath: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
