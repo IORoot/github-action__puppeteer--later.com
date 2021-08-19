@@ -8,8 +8,8 @@ jobs:
   build:
 
     env:
-      videourl: https://londonparkour.com/wp-content/uploads/2021/08/quick_test.mp4
-      videofile: quick_test.mp4
+      # videourl: https://londonparkour.com/wp-content/uploads/2021/08/quick_test.mp4
+      videofile: ldnpk_purple.png
       texturl: https://gist.githubusercontent.com/IORoot/dc4ce160c2d79fd7345c0b92c0ea820c/raw/b3bb3f87b9e4004b616082b3287d33c8a4631ba0/test.md
       textfile: test.md
             
@@ -19,9 +19,17 @@ jobs:
     - uses: actions/checkout@master
 
 
-    - name: Download Video and Text
+    - name: rclone download Media from GDrive
+      uses: wei/rclone@v1
+      env:
+        RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+      with:
+        args: copy remote:later/${{ env.videofile }} ./
+
+
+    - name: Download Gist Text
       run: |
-        wget ${{ env.videourl }}
+        # wget ${{ env.videourl }}
         wget ${{ env.texturl }}
 
 
