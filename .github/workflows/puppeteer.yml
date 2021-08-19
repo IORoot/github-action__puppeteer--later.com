@@ -24,7 +24,7 @@ jobs:
       env:
         RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
       with:
-        args: copy GDrive:/later/${{ env.videofile }} ./
+        args: copy GDrive:${{ env.videofile }} ./
 
 
     - name: Download Gist Text
