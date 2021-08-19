@@ -2,9 +2,10 @@ var runner = (function () {
 
     const puppeteer = require('puppeteer-core');
     let puppeteer_settings = { 
-        headless: true, 
+        headless: false, 
         devtools: false,
-        executablePath: "/usr/bin/google-chrome-stable",
+        // executablePath: "/usr/bin/google-chrome-stable",
+        executablePath: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
         args: ['--no-sandbox']
     }
     let browser;
@@ -131,17 +132,33 @@ var runner = (function () {
              */
             try {
                 console.log('click upload button');
-                await page.click('.cLIB--boardHeader > .cLIB--boardHeader__upload > .cUP--upload > .is--base > span')
-                await page.waitForTimeout(3000);
+                
+                const [fileChooser] = await Promise.all([
+                    page.waitForFileChooser(),
+                    page.click('.cLIB--boardHeader > .cLIB--boardHeader__upload > .cUP--upload > .is--base > span'),
+                ]);
+                console.log('accept MP4');
+                await fileChooser.accept(['/Users/andypearson/Repository/Code/Github Actions/workflow__puppeteer--later.com/quick_test.mp4']);
+
             } catch {
                 console.log('Unable to upload video : ' + err);
                 return;
             }
 
+            try {
+                console.log('Waiting for upload to complete')
+                await page.waitForFunction(
+                    'document.querySelector(".cLIB--message").innerText.includes("All Items Loaded :)")',
+                );
+            } catch {
+                console.log('Wait for upload to complete timed out : ' + err);
+                return;
+            }
 
             console.log('screenshot_upload');
             await page.screenshot({path: './screenshot_upload.png', fullPage: true});
             
+            await page.waitForTimeout(1000);
             await browser.close();
         
         })();
