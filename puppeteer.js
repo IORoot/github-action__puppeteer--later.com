@@ -131,7 +131,7 @@ var runner = (function () {
              */
             try {
                 console.log('click upload button');
-                await page.click('.cUP--upload__text.is--base');
+                await page.click('.cLIB--boardHeader > .cLIB--boardHeader__upload > .cUP--upload > .is--base > span')
                 await page.waitForTimeout(3000);
             } catch {
                 console.log('Unable to upload video : ' + err);
