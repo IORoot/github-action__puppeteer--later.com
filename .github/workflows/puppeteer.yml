@@ -27,10 +27,25 @@ jobs:
         args: copy GDrive:${{ env.videofile }} ./
 
 
-    - name: Download Gist Text
+    - name: Download Gist Text and media permissions
       run: |
-        # wget ${{ env.videourl }}
+        chown runner:docker ${{ env.videofile }}
         wget ${{ env.texturl }}
-        ls -la
-        cat ${{ env.videofile }}
 
+
+    - name: Install
+      uses: IORoot/action__puppeteer--media@master
+      with:
+        args: npm install
+
+
+    - name: Test Code
+      uses: IORoot/action__puppeteer--media@master
+      with:
+        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} ${{ env.videofile }} ${{ env.textfile }}
+
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: upload screenshot
+        path: ./screenshot*.png
