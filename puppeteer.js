@@ -4,8 +4,8 @@ var runner = (function () {
     let puppeteer_settings = { 
         headless: false, 
         devtools: false,
-        // executablePath: "/usr/bin/google-chrome-stable",
-        executablePath: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
+        executablePath: "/usr/bin/google-chrome-stable",
+        // executablePath: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
         args: ['--no-sandbox']
     }
     let browser;
