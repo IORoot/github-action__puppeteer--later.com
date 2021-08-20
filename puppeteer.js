@@ -12,7 +12,8 @@ var runner = (function () {
     let page;
     let username;
     let password;
-    let texturl;
+    let imagefile;
+    let textfile;
 
     // ┌──────────────────────────────────────────────────────────┐
     // │                                                          │
@@ -26,11 +27,11 @@ var runner = (function () {
 
         password = arguments[1];
 
-        imageurl = arguments[2];
-        console.log('Image URL: ', imageurl);
+        imagefile = arguments[2];
+        console.log('Media File: ', imagefile);
 
-        texturl = arguments[3];
-        console.log('Text URL: ', texturl);
+        textfile = arguments[3];
+        console.log('Text File: ', textfile);
     }
 
     // ┌──────────────────────────────────────────────────────────┐
@@ -95,6 +96,7 @@ var runner = (function () {
                 return;
             }
 
+            
             /**
              * Login
              */
@@ -137,11 +139,12 @@ var runner = (function () {
                     page.waitForFileChooser(),
                     page.click('.cLIB--boardHeader > .cLIB--boardHeader__upload > .cUP--upload > .is--base > span'),
                 ]);
-                console.log('accept MP4');
-                await fileChooser.accept(['/Users/andypearson/Repository/Code/Github Actions/workflow__puppeteer--later.com/quick_test.mp4']);
+                console.log('Choose Media file: ' + imagefile);
+                await fileChooser.accept([imagefile]);
+                // await fileChooser.accept(['/Users/andypearson/Repository/Code/Github Actions/workflow__puppeteer--later.com/quick_test.mp4']);
 
             } catch {
-                console.log('Unable to upload video : ' + err);
+                console.log('Unable to upload media : ' + err);
                 return;
             }
 
