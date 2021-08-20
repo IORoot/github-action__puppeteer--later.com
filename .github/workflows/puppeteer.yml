@@ -29,8 +29,9 @@ jobs:
 
     - name: Download Gist Text and media permissions
       run: |
-        chown runner:docker ${{ env.videofile }}
+        sudo chown runner:docker ${{ env.videofile }}
         wget ${{ env.texturl }}
+        ll
 
 
     - name: Install
