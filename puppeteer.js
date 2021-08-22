@@ -422,12 +422,11 @@ var runner = (function () {
 
 
             /**
-             * Screenshot
+             * Screenshot & close
              */
             console.log('screenshot_upload');
             await page.screenshot({path: './screenshot_upload.png', fullPage: true});
-
-            await page.waitForTimeout(100000);
+            // await page.waitForTimeout(1000);
             await browser.close();
         
         })();
