@@ -149,9 +149,6 @@ var runner = (function () {
                 console.log('type into #ember7 (password)');
                 await page.type('#ember7', password);
 
-                console.log('screenshot_login');
-                await page.screenshot({path: './screenshot_login.png', fullPage: true});
-
                 console.log('click login button');
                 await page.click('.qa--login__btn');
                 
