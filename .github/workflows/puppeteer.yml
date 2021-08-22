@@ -12,6 +12,11 @@ jobs:
       videofile: ldnpk_purple.png
       texturl: https://gist.githubusercontent.com/IORoot/dc4ce160c2d79fd7345c0b92c0ea820c/raw/b3bb3f87b9e4004b616082b3287d33c8a4631ba0/test.md
       textfile: test.md
+      month: 8
+      day: 23
+      hour: 11
+      minute: 00
+      ampm: 'AM'
             
     runs-on: ubuntu-latest
 
@@ -32,7 +37,7 @@ jobs:
         sudo chown runner:docker ${{ env.videofile }}
         ls -la
 
-        
+
     - name: Download Gist Text and media permissions
       run: |
         wget ${{ env.texturl }}
@@ -47,7 +52,7 @@ jobs:
     - name: Test Code
       uses: IORoot/action__puppeteer--media@master
       with:
-        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} ${{ env.videofile }} ${{ env.textfile }}
+        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} ${{ env.videofile }} ${{ env.textfile }} ${{ env.day }} ${{ env.month }} ${{ env.hour }} ${{ env.minute }} ${{ env.ampm }}
 
 
     - uses: actions/upload-artifact@v2
