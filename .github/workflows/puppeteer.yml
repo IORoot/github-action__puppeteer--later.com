@@ -27,11 +27,15 @@ jobs:
         args: copy GDrive:${{ env.videofile }} ./
 
 
-    - name: Download Gist Text and media permissions
+    - name: Set media permissions
       run: |
         sudo chown runner:docker ${{ env.videofile }}
-        wget ${{ env.texturl }}
         ls -la
+
+        
+    - name: Download Gist Text and media permissions
+      run: |
+        wget ${{ env.texturl }}
 
 
     - name: Install
