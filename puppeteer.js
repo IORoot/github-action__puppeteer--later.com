@@ -401,9 +401,11 @@ var runner = (function () {
                 /**
                  * Get number of channels
                  */
-                await page.screenshot({path: './screenshot_one.png', fullPage: true});
-                await page.waitForSelector('.cPM--modalCard .cPM--modalPost')
-                let parent = await page.$('.cPM--modalCard .cPM--modalPost')
+                let debug = await page.$('.o--modalBody')
+                console.log('.o--modalBody:' + debug);
+
+                await page.waitForSelector('.o--modalBody .cPM--modalPost')
+                let parent = await page.$('.o--modalBody .cPM--modalPost')
                 let channelcount = await page.evaluate(el => el.childElementCount, parent)
                 console.log('Channel Count:' + channelcount);
 
