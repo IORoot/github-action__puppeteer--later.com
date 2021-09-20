@@ -13,9 +13,16 @@ jobs:
     - uses: actions/checkout@master
 
 
-    - name: Download Video
+    - name: rclone download Media from GDrive
+      uses: wei/rclone@v1
+      env:
+        RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+      with:
+        args: copyurl --no-check-certificate $(cat post_videourl.txt) video.mp4
+
+
+    - name: change owner
       run: |
-        ./script_download.sh video.mp4
         sudo chown runner:docker video.mp4
         ls -la
 
