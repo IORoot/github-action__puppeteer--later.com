@@ -4,18 +4,18 @@ var runner = (function () {
     const puppeteer = require('puppeteer-core');
 
     let puppeteer_settings = { 
-        headless: true, 
+        headless: false, 
         devtools: false,
-        executablePath: "/usr/bin/google-chrome-stable",
-        // executablePath: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
+        // executablePath: "/usr/bin/google-chrome-stable",
+        executablePath: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
         args: ['--no-sandbox']
     }
+
     let browser;
     let page;
     let username;
     let password;
     let mediafile;
-    let textfile;
     let footerdata     = "@lonetraceur";
     let textdata       = "This is a test post.";
     let scheduleday    = "1";
@@ -40,15 +40,19 @@ var runner = (function () {
         mediafile = arguments[2];
         console.log('Media File (string): ', mediafile);
 
-        textfile = arguments[3];
-        console.log('Text File (string): ', textfile);
-
         footerdata = fs.readFileSync('post_footer.txt', 'utf8');
-        console.log('Footer: ' + footerdata)
 
-        textdata = fs.readFileSync(textfile, 'utf8');
-        textdata = textdata + footerdata;
-        console.log('FULL Message: ' + textdata)
+        instagram_text = fs.readFileSync('post_text_ig.txt', 'utf8');
+        instagram_text = instagram_text + footerdata;
+        console.log('Instagram Message: ' + instagram_text)
+
+        facebook_text = fs.readFileSync('post_text_fb.txt', 'utf8');
+        facebook_text = facebook_text + footerdata;
+        console.log('Facebook Message: ' + facebook_text)
+
+        twitter_text = fs.readFileSync('post_text_tw.txt', 'utf8');
+        twitter_text = twitter_text.substring(0, 160);
+        console.log('Twitter Message: ' + twitter_text)
 
         scheduleday= parseInt(arguments[4]);
         console.log('Schedule Day (int): ', scheduleday);
@@ -157,6 +161,21 @@ var runner = (function () {
                 console.log('Unable to login : ' + err);
                 return;
             }
+
+
+            /**
+             * Click any modals getting in the way
+             */
+            try {
+                console.log('click annoying modals');
+                await page.waitForSelector('.o--modalWrapper .o--modalFooter .o--btn');
+                await page.click('.o--modalWrapper .o--modalFooter .o--btn');
+                await page.waitForTimeout(1000);
+            } catch (err) {
+                console.log('Unable to upload media : ' + err);
+                return;
+            }
+
 
 
             /**
@@ -358,18 +377,6 @@ var runner = (function () {
 
 
             /**
-             * Type in caption
-             */
-            try {
-                console.log('Typing in text.');
-                await page.type('.o--modalCard .cPM--field__composerBody textarea', textdata);
-            } catch (err) {
-                console.log('Error typing into composer textarea : ' + err);
-                return;
-            }
-
-
-            /**
              * Click on "CUSTOMIZE 3 POSTS"
              */
             try {
@@ -379,6 +386,62 @@ var runner = (function () {
                 console.log('Error clicking on customize posts button : ' + err);
                 return;
             }
+
+
+            /**
+             * Type in captions
+             */
+            
+            try {
+                console.log('Typing in first modal.');
+
+                /**
+                 * Get number of channels
+                 */
+                await page.waitForSelector('.cPM--modalCard .cPM--modalPost')
+                let parent = await page.$('.cPM--modalCard .cPM--modalPost')
+                let channelcount = await page.evaluate(el => el.childElementCount, parent)
+                console.log('Channel Count:' + channelcount);
+
+
+                /**
+                 * Loop through each channel entering the text.
+                 */
+                channelcount++
+                for (let step = 1; step < channelcount; step++) {
+
+                    console.log('Process Channel Iteration:' + step);
+                    /**
+                     * Check textbox exists?
+                     */
+                    await page.waitForSelector('.cPM--modalCard .cPM--modalPost:nth-child('+ step +')')
+                    let element = await page.$('.cPM--modalCard .cPM--modalPost:nth-child('+ step +') .o--modalHeader .o--user__desc')
+                    let channel = await page.evaluate(el => el.textContent, element)
+                    
+                    /**
+                     * Check Channel type.
+                     */
+                    if (channel.trim() === "Instagram") {
+                        await page.type('.o--modalCard .cPM--modalPost:nth-child('+ step +') .cPM--field__composerBody textarea', instagram_text);
+                    }
+
+                    if (channel.trim() === "Facebook") {
+                        await page.type('.o--modalCard .cPM--modalPost:nth-child('+ step +') .cPM--field__composerBody textarea', facebook_text);
+                    }
+
+                    if (channel.trim() === "Twitter") {
+                        await page.type('.o--modalCard .cPM--modalPost:nth-child('+ step +') .cPM--field__composerBody textarea', twitter_text);
+                    }
+
+                }
+                await page.waitForTimeout(1000);
+            } catch (err) {
+                console.log('Error typing into composer textarea : ' + err);
+                return;
+            }
+
+
+
 
 
             /**
@@ -411,7 +474,7 @@ var runner = (function () {
              */
             try {
                 console.log('Clicking on Cancel on any popup');
-                await page.waitForTimeout(1000);
+                await page.waitForTimeout(10000);
                 await page.click('.qa--modal_cancel_btn');
             } catch (err) {
                 console.log('Error clicking on cancel on popup: ' + err);
