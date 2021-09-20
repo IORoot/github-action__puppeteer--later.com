@@ -4,10 +4,10 @@ var runner = (function () {
     const puppeteer = require('puppeteer-core');
 
     let puppeteer_settings = { 
-        headless: true, 
+        headless: false, 
         devtools: false,
-        executablePath: "/usr/bin/google-chrome-stable",
-        // executablePath: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
+        // executablePath: "/usr/bin/google-chrome-stable",
+        executablePath: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
         args: ['--no-sandbox']
     }
 
@@ -170,7 +170,10 @@ var runner = (function () {
                 console.log('click annoying modals');
                 await page.waitForSelector('.o--modalWrapper .o--modalFooter .o--btn');
                 await page.click('.o--modalWrapper .o--modalFooter .o--btn');
-                await page.waitForTimeout(20000);
+
+                await page.waitForSelector('.o--alertContainer button');
+                await page.click('.o--alertContainer button');
+                await page.waitForTimeout(1000);
             } catch (err) {
                 console.log('Unable to upload media : ' + err);
                 return;
