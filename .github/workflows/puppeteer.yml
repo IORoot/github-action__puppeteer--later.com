@@ -7,40 +7,17 @@ jobs:
 
   build:
 
-    env:
-      # videourl: https://londonparkour.com/wp-content/uploads/2021/08/quick_test.mp4
-      videofile: ldnpk_purple.png
-      texturl: https://gist.githubusercontent.com/IORoot/dc4ce160c2d79fd7345c0b92c0ea820c/raw/b3bb3f87b9e4004b616082b3287d33c8a4631ba0/test.md
-      textfile: test.md
-      month: 8
-      day: 23
-      hour: 11
-      minute: 00
-      ampm: 'AM'
-            
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@master
 
 
-    - name: rclone download Media from GDrive
-      uses: wei/rclone@v1
-      env:
-        RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
-      with:
-        args: copy GDrive:${{ env.videofile }} ./
-
-
-    - name: Set media permissions
+    - name: Download Video
       run: |
-        sudo chown runner:docker ${{ env.videofile }}
+        ./script_download.sh video.mp4
+        sudo chown runner:docker video.mp4
         ls -la
-
-
-    - name: Download Gist Text and media permissions
-      run: |
-        wget ${{ env.texturl }}
 
 
     - name: Install
@@ -52,7 +29,7 @@ jobs:
     - name: Test Code
       uses: IORoot/action__puppeteer--media@master
       with:
-        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} ${{ env.videofile }} ${{ env.textfile }} ${{ env.day }} ${{ env.month }} ${{ env.hour }} ${{ env.minute }} ${{ env.ampm }}
+        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video.mp4 post_text.txt $( cat post_schedule.txt )
 
 
     - uses: actions/upload-artifact@v2

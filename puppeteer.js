@@ -43,12 +43,12 @@ var runner = (function () {
         textfile = arguments[3];
         console.log('Text File (string): ', textfile);
 
-        footerdata = fs.readFileSync('footer', 'utf8');
-        console.log('TEXTDATA: ' + footerdata)
+        footerdata = fs.readFileSync('post_footer.txt', 'utf8');
+        console.log('Footer: ' + footerdata)
 
         textdata = fs.readFileSync(textfile, 'utf8');
         textdata = textdata + footerdata;
-        console.log('TEXTDATA: ' + textdata)
+        console.log('FULL Message: ' + textdata)
 
         scheduleday= parseInt(arguments[4]);
         console.log('Schedule Day (int): ', scheduleday);
