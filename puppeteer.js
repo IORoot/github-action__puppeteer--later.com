@@ -252,6 +252,7 @@ var runner = (function () {
                 console.log('Not clicking on Twitter, already selected.');
             }
 
+            await page.screenshot({path: './screenshot_channels.png', fullPage: true});
 
             /**
              * Click on first media image
@@ -450,8 +451,7 @@ var runner = (function () {
                 await page.waitForTimeout(1000);
             } catch (err) {
                 console.log('Error typing into composer textarea : ' + err);
-                await browser.close();
-                return;
+                await page.screenshot({path: './screenshot_text_error.png', fullPage: true});
             }
 
 
