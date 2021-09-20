@@ -21,12 +21,12 @@ jobs:
     
     - name: Download Text,Schedules and Video URL
       run: |
-        wget ${{ env.remote }}/post_text_fb.txt
-        wget ${{ env.remote }}/post_text_ig.txt
-        wget ${{ env.remote }}/post_text_tw.txt
-        wget ${{ env.remote }}/post_schedule.txt
-        wget ${{ env.remote }}/post_footer.txt
-        wget ${{ env.remote }}/post_videourl.txt
+        wget --no-check-certificate ${{ env.remote }}/post_text_fb.txt
+        wget --no-check-certificate ${{ env.remote }}/post_text_ig.txt
+        wget --no-check-certificate ${{ env.remote }}/post_text_tw.txt
+        wget --no-check-certificate ${{ env.remote }}/post_schedule.txt
+        wget --no-check-certificate ${{ env.remote }}/post_footer.txt
+        wget --no-check-certificate ${{ env.remote }}/post_videourl.txt
 
 
     - name: Set env
