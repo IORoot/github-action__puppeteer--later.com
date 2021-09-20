@@ -12,6 +12,13 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
+    - name: Set env
+      run: echo "SCHEDULE=$(cat post_schedule.txt)" >> $GITHUB_ENV
+
+      
+    - name: Test Schedule
+      run: echo ${{ env.SCHEDULE }}
+
 
     - name: rclone download Media from GDrive
       uses: wei/rclone@v1
@@ -36,7 +43,7 @@ jobs:
     - name: Test Code
       uses: IORoot/action__puppeteer--media@master
       with:
-        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video.mp4 post_text.txt $( cat post_schedule.txt )
+        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video.mp4 post_text.txt ${{ env.SCHEDULE }}
 
 
     - uses: actions/upload-artifact@v2
