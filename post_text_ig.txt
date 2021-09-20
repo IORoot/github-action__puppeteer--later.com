@@ -1,8 +1,0 @@
-This is a test INSTAGRAM post.
-
-It contains multiple lines.
-
-Will that translate into the post, or...
-
-
-will it concatenate onto a single line?

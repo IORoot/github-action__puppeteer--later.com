@@ -292,51 +292,6 @@ var runner = (function () {
 
 
             /**
-             * Toggle AM / PM
-             */
-            try {
-                await page.waitForTimeout(1000);
-                console.log('Selecting AM / PM: ' + scheduleampm);
-                const CurrentAMPM = await page.$eval('.flatpickr-am-pm', element => element.innerHTML);
-                if (CurrentAMPM != scheduleampm) {
-                    await page.click('.flatpickr-am-pm');
-                }
-            } catch (err) {
-                console.log('Error clicking on AM / PM : ' + err);
-                return;
-            }
-
-
-            /**
-             * Select Hour
-             */
-            try {
-                await page.waitForTimeout(1000);
-                console.log('Selecting Hour: ' + schedulehour);
-                await page.waitForSelector('.flatpickr-hour')
-                await page.type('.flatpickr-hour', '' + schedulehour);
-                await page.keyboard.press('Tab'); 
-            } catch (err) {
-                console.log('Error clicking on selecting hour : ' + err);
-                return;
-            }            
-
-
-            /**
-             * Select Minute
-             */
-            try {
-                await page.waitForTimeout(1000);
-                console.log('Selecting Minute: ' + scheduleminute);
-                await page.type('.flatpickr-minute', '' + scheduleminute);
-                await page.keyboard.press('Tab');
-            } catch (err) {
-                console.log('Error clicking on selecting minute : ' + err);
-                return;
-            }
-
-
-            /**
              * Select Day
              */
             try {
@@ -375,6 +330,50 @@ var runner = (function () {
             }
 
 
+            /**
+             * Select Hour
+             */
+            try {
+                await page.waitForTimeout(1000);
+                console.log('Selecting Hour: ' + schedulehour);
+                await page.waitForSelector('.flatpickr-hour')
+                await page.type('.flatpickr-hour', '' + schedulehour);
+                await page.keyboard.press('Tab'); 
+            } catch (err) {
+                console.log('Error clicking on selecting hour : ' + err);
+                return;
+            }            
+
+
+            /**
+             * Select Minute
+             */
+            try {
+                await page.waitForTimeout(1000);
+                console.log('Selecting Minute: ' + scheduleminute);
+                await page.type('.flatpickr-minute', '' + scheduleminute);
+                await page.keyboard.press('Tab');
+            } catch (err) {
+                console.log('Error clicking on selecting minute : ' + err);
+                return;
+            }
+
+
+            /**
+             * Toggle AM / PM
+             */
+            try {
+                await page.waitForTimeout(1000);
+                console.log('Selecting AM / PM: ' + scheduleampm);
+                const CurrentAMPM = await page.$eval('.flatpickr-am-pm', element => element.innerHTML);
+                if (CurrentAMPM != scheduleampm) {
+                    await page.click('.flatpickr-am-pm');
+                }
+            } catch (err) {
+                console.log('Error clicking on AM / PM : ' + err);
+                return;
+            }
+                    
             /**
              * Close Calendar
              */

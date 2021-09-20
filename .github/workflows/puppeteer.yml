@@ -6,22 +6,31 @@ on:
     branches:
       - master
 
-      
 jobs:
 
   build:
+
+    env:
+      remote: "https://londonparkour.com/wp-content/uploads/posts"
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@master
 
+    
+    - name: Download Text,Schedules and Video URL
+      run: |
+        wget ${{ env.remote }}/post_text_fb.txt
+        wget ${{ env.remote }}/post_text_ig.txt
+        wget ${{ env.remote }}/post_text_tw.txt
+        wget ${{ env.remote }}/post_schedule.txt
+        wget ${{ env.remote }}/post_footer.txt
+        wget ${{ env.remote }}/post_videourl.txt
+
+
     - name: Set env
       run: echo "SCHEDULE=$(cat post_schedule.txt)" >> $GITHUB_ENV
-
-      
-    - name: Test Schedule
-      run: echo ${{ env.SCHEDULE }}
 
 
     - name: rclone download Media from GDrive
@@ -35,7 +44,6 @@ jobs:
     - name: change owner
       run: |
         sudo chown runner:docker video.mp4
-        ls -la
 
 
     - name: Install
