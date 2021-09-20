@@ -170,7 +170,7 @@ var runner = (function () {
                 console.log('click annoying modals');
                 await page.waitForSelector('.o--modalWrapper .o--modalFooter .o--btn');
                 await page.click('.o--modalWrapper .o--modalFooter .o--btn');
-                await page.waitForTimeout(1000);
+                await page.waitForTimeout(20000);
             } catch (err) {
                 console.log('Unable to upload media : ' + err);
                 return;
@@ -222,7 +222,6 @@ var runner = (function () {
              */
             try {
                 console.log('Selecting Instagram')
-                await page.screenshot({path: './screenshot_debug1.png', fullPage: true});
                 await page.click('.is--p__igpink.is--unselected .cCA--account__action--primary');
             } catch (err) {
                 console.log('Not clicking on Instagram, already selected.');
@@ -234,7 +233,6 @@ var runner = (function () {
              */
             try {
                 console.log('Selecting Facebook')
-                await page.screenshot({path: './screenshot_debug2.png', fullPage: true});
                 await page.click('.is--p__yellow.is--unselected .cCA--account__action--primary');
             } catch (err) {
                 console.log('Not clicking on Facebook, already selected.');
@@ -246,7 +244,6 @@ var runner = (function () {
              */
             try {
                 console.log('Selecting Twitter')
-                await page.screenshot({path: './screenshot_debug3.png', fullPage: true});
                 await page.click('.is--p__twblue.is--unselected .cCA--account__action--primary');
             } catch (err) {
                 console.log('Not clicking on Twitter, already selected.');
