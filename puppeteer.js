@@ -381,8 +381,9 @@ var runner = (function () {
              */
             try {
                 console.log('Clicking on Customize Posts button');
-                await page.click('.o--btn--primary');
                 await page.screenshot({path: './screenshot_upload.png', fullPage: true});
+                await page.click('.o--btn--primary');
+                
             } catch (err) {
                 console.log('Error clicking on customize posts button : ' + err);
                 return;
@@ -446,41 +447,41 @@ var runner = (function () {
 
 
 
-            /**
-             * Click on "SAVE 3 POSTS"
-             */
-            try {
-                await page.waitForTimeout(1000);
-                console.log('Clicking on Save button');
-                await page.click('.qa--media_modal__primary_button');
-            } catch (err) {
-                console.log('Error clicking on save posts button : ' + err);
-                return;
-            }
+            // /**
+            //  * Click on "SAVE 3 POSTS"
+            //  */
+            // try {
+            //     await page.waitForTimeout(1000);
+            //     console.log('Clicking on Save button');
+            //     await page.click('.qa--media_modal__primary_button');
+            // } catch (err) {
+            //     console.log('Error clicking on save posts button : ' + err);
+            //     return;
+            // }
 
 
-            /**
-             * Click on "DONE"
-             */
-            try {
-                console.log('Clicking on X on any popup');
-                await page.waitForTimeout(1000);
-                await page.click('.o--modal--closeIcon');
-            } catch (err) {
-                console.log('Error clicking on X on popup: ' + err);
-            }
+            // /**
+            //  * Click on "DONE"
+            //  */
+            // try {
+            //     console.log('Clicking on X on any popup');
+            //     await page.waitForTimeout(1000);
+            //     await page.click('.o--modal--closeIcon');
+            // } catch (err) {
+            //     console.log('Error clicking on X on popup: ' + err);
+            // }
 
 
-            /**
-             * Click on "CANCEL"
-             */
-            try {
-                console.log('Clicking on Cancel on any popup');
-                await page.waitForTimeout(10000);
-                await page.click('.qa--modal_cancel_btn');
-            } catch (err) {
-                console.log('Error clicking on cancel on popup: ' + err);
-            }
+            // /**
+            //  * Click on "CANCEL"
+            //  */
+            // try {
+            //     console.log('Clicking on Cancel on any popup');
+            //     await page.waitForTimeout(10000);
+            //     await page.click('.qa--modal_cancel_btn');
+            // } catch (err) {
+            //     console.log('Error clicking on cancel on popup: ' + err);
+            // }
 
 
             // /**
