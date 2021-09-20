@@ -382,64 +382,65 @@ var runner = (function () {
             try {
                 console.log('Clicking on Customize Posts button');
                 await page.click('.o--btn--primary');
+                await page.screenshot({path: './screenshot_upload.png', fullPage: true});
             } catch (err) {
                 console.log('Error clicking on customize posts button : ' + err);
                 return;
             }
 
 
-            /**
-             * Type in captions
-             */
+            // /**
+            //  * Type in captions
+            //  */
             
-            try {
-                console.log('Typing in first modal.');
+            // try {
+            //     console.log('Typing in first modal.');
 
-                /**
-                 * Get number of channels
-                 */
-                await page.screenshot({path: './screenshot_one.png', fullPage: true});
-                await page.waitForSelector('.cPM--modalCard .cPM--modalPost')
-                let parent = await page.$('.cPM--modalCard .cPM--modalPost')
-                let channelcount = await page.evaluate(el => el.childElementCount, parent)
-                console.log('Channel Count:' + channelcount);
+            //     /**
+            //      * Get number of channels
+            //      */
+            //     await page.screenshot({path: './screenshot_one.png', fullPage: true});
+            //     await page.waitForSelector('.cPM--modalCard .cPM--modalPost')
+            //     let parent = await page.$('.cPM--modalCard .cPM--modalPost')
+            //     let channelcount = await page.evaluate(el => el.childElementCount, parent)
+            //     console.log('Channel Count:' + channelcount);
 
 
-                // /**
-                //  * Loop through each channel entering the text.
-                //  */
-                // channelcount++
-                // for (let step = 1; step < channelcount; step++) {
+            //     /**
+            //      * Loop through each channel entering the text.
+            //      */
+            //     channelcount++
+            //     for (let step = 1; step < channelcount; step++) {
 
-                //     console.log('Process Channel Iteration:' + step);
-                //     /**
-                //      * Check textbox exists?
-                //      */
-                //     await page.waitForSelector('.cPM--modalCard .cPM--modalPost:nth-child('+ step +')')
-                //     let element = await page.$('.cPM--modalCard .cPM--modalPost:nth-child('+ step +') .o--modalHeader .o--user__desc')
-                //     let channel = await page.evaluate(el => el.textContent, element)
+            //         console.log('Process Channel Iteration:' + step);
+            //         /**
+            //          * Check textbox exists?
+            //          */
+            //         await page.waitForSelector('.cPM--modalCard .cPM--modalPost:nth-child('+ step +')')
+            //         let element = await page.$('.cPM--modalCard .cPM--modalPost:nth-child('+ step +') .o--modalHeader .o--user__desc')
+            //         let channel = await page.evaluate(el => el.textContent, element)
                     
-                //     /**
-                //      * Check Channel type.
-                //      */
-                //     if (channel.trim() === "Instagram") {
-                //         await page.type('.o--modalCard .cPM--modalPost:nth-child('+ step +') .cPM--field__composerBody textarea', instagram_text);
-                //     }
+            //         /**
+            //          * Check Channel type.
+            //          */
+            //         if (channel.trim() === "Instagram") {
+            //             await page.type('.o--modalCard .cPM--modalPost:nth-child('+ step +') .cPM--field__composerBody textarea', instagram_text);
+            //         }
 
-                //     if (channel.trim() === "Facebook") {
-                //         await page.type('.o--modalCard .cPM--modalPost:nth-child('+ step +') .cPM--field__composerBody textarea', facebook_text);
-                //     }
+            //         if (channel.trim() === "Facebook") {
+            //             await page.type('.o--modalCard .cPM--modalPost:nth-child('+ step +') .cPM--field__composerBody textarea', facebook_text);
+            //         }
 
-                //     if (channel.trim() === "Twitter") {
-                //         await page.type('.o--modalCard .cPM--modalPost:nth-child('+ step +') .cPM--field__composerBody textarea', twitter_text);
-                //     }
+            //         if (channel.trim() === "Twitter") {
+            //             await page.type('.o--modalCard .cPM--modalPost:nth-child('+ step +') .cPM--field__composerBody textarea', twitter_text);
+            //         }
 
-                // }
-                await page.waitForTimeout(1000);
-            } catch (err) {
-                console.log('Error typing into composer textarea : ' + err);
-                return;
-            }
+            //     }
+            //     await page.waitForTimeout(1000);
+            // } catch (err) {
+            //     console.log('Error typing into composer textarea : ' + err);
+            //     return;
+            // }
 
 
 
@@ -482,13 +483,13 @@ var runner = (function () {
             }
 
 
-            /**
-             * Screenshot & close
-             */
-            console.log('screenshot_upload');
-            await page.screenshot({path: './screenshot_upload.png', fullPage: true});
-            // await page.waitForTimeout(1000);
-            await browser.close();
+            // /**
+            //  * Screenshot & close
+            //  */
+            // console.log('screenshot_upload');
+            // await page.screenshot({path: './screenshot_upload.png', fullPage: true});
+            // // await page.waitForTimeout(1000);
+            // await browser.close();
         
         })();
 
