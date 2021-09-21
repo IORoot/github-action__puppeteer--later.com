@@ -45,7 +45,7 @@ jobs:
 
     - name: change owner
       run: |
-        sudo chown runner:docker video.mp4
+        sudo chown -f runner:docker *.*
 
 
     - name: Install
