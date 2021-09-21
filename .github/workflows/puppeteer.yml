@@ -42,12 +42,12 @@ jobs:
       env:
         RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
       with:
-        args: copy GDrive:/video_post.mp4 ./
+        args: copy GDrive:/video.mp4 ./video.mp4
 
 
     - name: change owner
       run: |
-        sudo chown runner:docker video_post.mp4
+        sudo chown runner:docker video.mp4
 
 
     - name: Install
@@ -59,7 +59,7 @@ jobs:
     - name: Test Code
       uses: IORoot/action__puppeteer--media@master
       with:
-        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video_post.mp4 ${{ env.SCHEDULE }}
+        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video.mp4 ${{ env.SCHEDULE }}
 
 
     - uses: actions/upload-artifact@v2
