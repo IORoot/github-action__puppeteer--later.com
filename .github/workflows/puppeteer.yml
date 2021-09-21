@@ -12,8 +12,6 @@ jobs:
 
     env:
       remote: "https://londonparkour.com/wp-content/uploads/posts"
-      videofile_location: "/Code/n8n/SocialPosts/video_post.mp4"
-
 
     runs-on: ubuntu-latest
 
@@ -44,7 +42,7 @@ jobs:
       env:
         RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
       with:
-        args: copy GDrive:${{ env.videofile_location }} ./
+        args: copy GDrive:/Code/n8n/SocialPosts/video_post.mp4 ./
 
 
     - name: change owner
