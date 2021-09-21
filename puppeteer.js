@@ -40,33 +40,33 @@ var runner = (function () {
         mediafile = arguments[2];
         console.log('Media File (string): ', mediafile);
 
-        footerdata = fs.readFileSync('post_footer.txt', 'utf8');
+        footerdata = fs.readFileSync('footer.txt', 'utf8');
 
-        instagram_text = fs.readFileSync('post_text_ig.txt', 'utf8');
+        instagram_text = fs.readFileSync('instagram.txt', 'utf8');
         instagram_text = instagram_text + footerdata;
         console.log('Instagram Message: ' + instagram_text)
 
-        facebook_text = fs.readFileSync('post_text_fb.txt', 'utf8');
+        facebook_text = fs.readFileSync('facebook.txt', 'utf8');
         facebook_text = facebook_text + footerdata;
         console.log('Facebook Message: ' + facebook_text)
 
-        twitter_text = fs.readFileSync('post_text_tw.txt', 'utf8');
+        twitter_text = fs.readFileSync('twitter.txt', 'utf8');
         twitter_text = twitter_text.substring(0, 160);
         console.log('Twitter Message: ' + twitter_text)
 
-        scheduleday= parseInt(arguments[4]);
+        scheduleday= parseInt(arguments[3]);
         console.log('Schedule Day (int): ', scheduleday);
 
-        schedulemonth= parseInt(arguments[5]);
+        schedulemonth= parseInt(arguments[4]);
         console.log('Schedule Month (int): ', schedulemonth);
 
-        schedulehour= parseInt(arguments[6]);
+        schedulehour= parseInt(arguments[5]);
         console.log('Schedule Hour (int): ', schedulehour);
 
-        scheduleminute= parseInt(arguments[7]);
+        scheduleminute= parseInt(arguments[6]);
         console.log('Schedule Minute (int): ', scheduleminute);
 
-        scheduleampm= arguments[8];
+        scheduleampm= arguments[7];
         console.log('Schedule am/pm (string): ', scheduleampm);
 
     }

@@ -12,7 +12,7 @@ jobs:
 
     env:
       remote: "https://londonparkour.com/wp-content/uploads/posts"
-      # videofile_location: "my_video_file_on_gdrive.mp4"
+      videofile_location: "Code/n8n/SocialPosts/video_post.mp4"
 
 
     runs-on: ubuntu-latest
@@ -20,40 +20,36 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    
+    - name: Checkout this repo
+      uses: actions/checkout@v2
+
+    - name: Checkout social-media repo
+      uses: actions/checkout@v2
+      with:
+        repository: IORoot/n8n__social-media
+        path: posts
+
     - name: Download Text,Schedules and Video URL
       run: |
-        wget --no-check-certificate ${{ env.remote }}/post_text_fb.txt
-        wget --no-check-certificate ${{ env.remote }}/post_text_ig.txt
-        wget --no-check-certificate ${{ env.remote }}/post_text_tw.txt
-        wget --no-check-certificate ${{ env.remote }}/post_schedule.txt
-        wget --no-check-certificate ${{ env.remote }}/post_footer.txt
-        wget --no-check-certificate ${{ env.remote }}/post_videourl.txt
+        mv ./posts/*.txt ./
+        ls -la
 
 
     - name: Set env
-      run: echo "SCHEDULE=$(cat post_schedule.txt)" >> $GITHUB_ENV
-
+      run: echo "SCHEDULE=$(cat ./posts/schedule.txt)" >> $GITHUB_ENV
+      
 
     - name: rclone download Media from GDrive
       uses: wei/rclone@v1
       env:
         RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
       with:
-        args: copyurl --no-check-certificate $(cat post_videourl.txt) video.mp4
-
-
-    # - name: rclone download Media from GDrive
-    #   uses: wei/rclone@v1
-    #   env:
-    #     RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
-    #   with:
-    #     args: copy GDrive:${{ env.videofile_location }} ./
+        args: copy GDrive:${{ env.videofile_location }} ./
 
 
     - name: change owner
       run: |
-        sudo chown runner:docker video.mp4
+        sudo chown runner:docker video_post.mp4
 
 
     - name: Install
@@ -65,7 +61,7 @@ jobs:
     - name: Test Code
       uses: IORoot/action__puppeteer--media@master
       with:
-        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video.mp4 post_text.txt ${{ env.SCHEDULE }}
+        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video_post.mp4 ${{ env.SCHEDULE }}
 
 
     - uses: actions/upload-artifact@v2
