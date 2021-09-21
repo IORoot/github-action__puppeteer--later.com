@@ -42,7 +42,7 @@ jobs:
       env:
         RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
       with:
-        args: copy GDrive:/Code/n8n/SocialPosts/video_post.mp4 ./
+        args: copy GDrive:/video_post.mp4 ./
 
 
     - name: change owner
