@@ -27,12 +27,6 @@ jobs:
         repository: IORoot/n8n__social-media
         path: posts
 
-    - name: Download Text,Schedules and Video URL, Set env
-      run: |
-        mv ./posts/*.txt ./
-        echo "SCHEDULE=$(cat ./schedule.txt)" >> $GITHUB_ENV
-        ls -la
-
 
     - name: rclone download Media from GDrive
       uses: wei/rclone@v1
@@ -41,6 +35,13 @@ jobs:
       with:
         args: copy GDrive:/video.mp4 ./video.mp4
 
+
+    - name: Download Text, Schedules and set env
+      run: |
+        mv ./posts/*.txt ./
+        echo "SCHEDULE=$(cat ./schedule.txt)" >> $GITHUB_ENV
+        ls -la
+        
 
     - name: change owner
       run: |
