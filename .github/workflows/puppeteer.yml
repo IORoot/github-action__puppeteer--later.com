@@ -27,14 +27,11 @@ jobs:
         repository: IORoot/n8n__social-media
         path: posts
 
-    - name: Download Text,Schedules and Video URL
+    - name: Download Text,Schedules and Video URL, Set env
       run: |
         mv ./posts/*.txt ./
+        echo "SCHEDULE=$(cat ./schedule.txt)" >> $GITHUB_ENV
         ls -la
-
-
-    - name: Set env
-      run: echo "SCHEDULE=$(cat ./posts/schedule.txt)" >> $GITHUB_ENV
 
 
     - name: rclone download Media from GDrive
