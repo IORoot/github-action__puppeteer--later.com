@@ -21,36 +21,11 @@ jobs:
     - name: Checkout this repo
       uses: actions/checkout@v2
 
-    # - name: Checkout social-media repo
-    #   uses: actions/checkout@v2
-    #   with:
-    #     repository: IORoot/n8n__social-media
-    #     path: posts
-
-    - name: Get Schedeule
-      uses: andymckay/get-gist-action@master
+    - name: Checkout social-media repo
+      uses: actions/checkout@v2
       with:
-        gistURL: "https://gist.github.com/IORoot/44be37c3e8ca6c9a67882ecc79f856f5"
-
-    - name: Get Faceebook
-      uses: andymckay/get-gist-action@master
-      with:
-        gistURL: "https://gist.github.com/IORoot/e8a382f737e4458b1040d261cc680792"
-
-    - name: Get Instagram
-      uses: andymckay/get-gist-action@master
-      with:
-        gistURL: "https://gist.github.com/IORoot/5a07aa2c2f25e950abf99fba0e6549a3"
-
-    - name: Get Twitter
-      uses: andymckay/get-gist-action@master
-      with:
-        gistURL: "https://gist.github.com/IORoot/2cd2b9a3e10cae318c82c501f134151c"
-
-    - name: Get Footer
-      uses: andymckay/get-gist-action@master
-      with:
-        gistURL: "https://gist.github.com/IORoot/08d27c59ddfb77210c48e45ad9968886"
+        repository: IORoot/n8n__social
+        path: posts
 
 
     - name: rclone download Media from GDrive
@@ -63,7 +38,7 @@ jobs:
 
     - name: Download Text, Schedules and set env
       run: |
-        mv /tmp/*.md ./
+        mv ./posts/*.md ./
         echo "SCHEDULE=$(cat ./Schedule.md)" >> $GITHUB_ENV
         sudo chown -f runner:docker *.*
         ls -la
