@@ -33,34 +33,30 @@ jobs:
       env:
         RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
       with:
-        args: copy GDrive:/video.mp4 video.mp4
+        args: copy remote:video.mp4 ./video.mp4
 
 
     - name: Download Text, Schedules and set env
       run: |
         mv ./posts/*.txt ./
         echo "SCHEDULE=$(cat ./schedule.txt)" >> $GITHUB_ENV
-        ls -la
-        
-
-    - name: change owner
-      run: |
         sudo chown -f runner:docker *.*
+        ls -la
 
 
-    - name: Install
-      uses: IORoot/action__puppeteer--media@master
-      with:
-        args: npm install
+    # - name: Install
+    #   uses: IORoot/action__puppeteer--media@master
+    #   with:
+    #     args: npm install
 
 
-    - name: Test Code
-      uses: IORoot/action__puppeteer--media@master
-      with:
-        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video.mp4 ${{ env.SCHEDULE }}
+    # - name: Test Code
+    #   uses: IORoot/action__puppeteer--media@master
+    #   with:
+    #     args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video.mp4 ${{ env.SCHEDULE }}
 
 
-    - uses: actions/upload-artifact@v2
-      with:
-        name: upload screenshot
-        path: ./screenshot*.png
+    # - uses: actions/upload-artifact@v2
+    #   with:
+    #     name: upload screenshot
+    #     path: ./screenshot*.png
