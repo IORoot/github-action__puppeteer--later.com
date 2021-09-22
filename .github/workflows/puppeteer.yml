@@ -67,22 +67,21 @@ jobs:
         echo "SCHEDULE=$(cat ./Schedule.md)" >> $GITHUB_ENV
         sudo chown -f runner:docker *.*
         ls -la
-        cat *.md
 
 
-    # - name: Install
-    #   uses: IORoot/action__puppeteer--media@master
-    #   with:
-    #     args: npm install
+    - name: Install
+      uses: IORoot/action__puppeteer--media@master
+      with:
+        args: npm install
 
 
-    # - name: Test Code
-    #   uses: IORoot/action__puppeteer--media@master
-    #   with:
-    #     args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video.mp4 ${{ env.SCHEDULE }}
+    - name: Test Code
+      uses: IORoot/action__puppeteer--media@master
+      with:
+        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video.mp4 ${{ env.SCHEDULE }}
 
 
-    # - uses: actions/upload-artifact@v2
-    #   with:
-    #     name: upload screenshot
-    #     path: ./screenshot*.png
+    - uses: actions/upload-artifact@v2
+      with:
+        name: upload screenshot
+        path: ./screenshot*.png
