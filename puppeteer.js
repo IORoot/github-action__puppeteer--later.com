@@ -40,7 +40,7 @@ var runner = (function () {
         mediafile = arguments[2];
         console.log('Media File (string): ', mediafile);
 
-        footerdata = fs.readFileSync('Footer.md', 'utf8');
+        footerdata = fs.readFileSync('footer.md', 'utf8');
 
         instagram_text = fs.readFileSync('Instagram.md', 'utf8');
         instagram_text = instagram_text + footerdata;
