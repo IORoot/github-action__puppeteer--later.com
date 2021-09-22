@@ -33,7 +33,7 @@ jobs:
       env:
         RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
       with:
-        args: copy remote:video.mp4 ./video.mp4
+        args: copy remote:video.mp4 ./
 
 
     - name: Download Text, Schedules and set env
