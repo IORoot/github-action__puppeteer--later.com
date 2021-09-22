@@ -378,6 +378,9 @@ var runner = (function () {
             }
 
 
+            await page.screenshot({path: './screenshot03_schedule.png', fullPage: true});
+
+
             /**
              * Close Calendar
              */
@@ -389,10 +392,6 @@ var runner = (function () {
                 console.log('Error closing calendar : ' + err);
                 return;
             }
-
-
-            await page.screenshot({path: './screenshot03_schedule.png', fullPage: true});
-
 
 
             /**
