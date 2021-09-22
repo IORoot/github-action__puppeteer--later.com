@@ -220,6 +220,8 @@ var runner = (function () {
             // │                                                          │
             // └──────────────────────────────────────────────────────────┘
 
+            await page.screenshot({path: './screenshot01_channels.png', fullPage: true});
+
             /**
              * Select Instagram
              */
@@ -252,7 +254,7 @@ var runner = (function () {
                 console.log('Not clicking on Twitter, already selected.');
             }
 
-            await page.screenshot({path: './screenshot_channels.png', fullPage: true});
+            await page.screenshot({path: './screenshot02_selected.png', fullPage: true});
 
             /**
              * Click on first media image
@@ -374,7 +376,8 @@ var runner = (function () {
                 console.log('Error clicking on AM / PM : ' + err);
                 return;
             }
-                    
+
+
             /**
              * Close Calendar
              */
@@ -386,6 +389,10 @@ var runner = (function () {
                 console.log('Error closing calendar : ' + err);
                 return;
             }
+
+
+            await page.screenshot({path: './screenshot03_schedule.png', fullPage: true});
+
 
 
             /**
@@ -401,6 +408,9 @@ var runner = (function () {
             }
 
 
+            await page.screenshot({path: './screenshot04_three_posts.png', fullPage: true});
+
+
             /**
              * Type in captions
              */
@@ -411,7 +421,7 @@ var runner = (function () {
                 /**
                  * Get number of channels
                  */
-                // await page.screenshot({path: './screenshot_debug.png', fullPage: true});
+                await page.screenshot({path: './screenshot05_debug.png', fullPage: true});
                 await page.waitForSelector('.o--modalBody .cPM--modalPost')
                 let parent = await page.$('.o--modalBody .cPM--modalPost')
                 let channelcount = await page.evaluate(el => el.childElementCount, parent)
@@ -451,11 +461,11 @@ var runner = (function () {
                 await page.waitForTimeout(1000);
             } catch (err) {
                 console.log('Error typing into composer textarea : ' + err);
-                await page.screenshot({path: './screenshot_text_error.png', fullPage: true});
+                await page.screenshot({path: './screenshot06_text_error.png', fullPage: true});
             }
 
 
-
+            await page.screenshot({path: './screenshot07_filled.png', fullPage: true});
 
 
             /**
@@ -499,7 +509,7 @@ var runner = (function () {
              * Screenshot & close
              */
             console.log('screenshot_upload');
-            await page.screenshot({path: './screenshot_upload.png', fullPage: true});
+            await page.screenshot({path: './screenshot08_upload.png', fullPage: true});
             // await page.waitForTimeout(1000);
             await browser.close();
         
