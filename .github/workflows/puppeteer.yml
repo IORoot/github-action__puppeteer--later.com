@@ -66,6 +66,7 @@ jobs:
 
     - name: Download Text, Schedules and set env
       run: |
+        mv /tmp/*.md ./
         echo "SCHEDULE=$(cat ./schedule.md)" >> $GITHUB_ENV
         sudo chown -f runner:docker *.*
         ls -la
