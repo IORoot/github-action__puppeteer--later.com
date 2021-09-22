@@ -40,17 +40,17 @@ var runner = (function () {
         mediafile = arguments[2];
         console.log('Media File (string): ', mediafile);
 
-        footerdata = fs.readFileSync('footer.txt', 'utf8');
+        footerdata = fs.readFileSync('Footer.md', 'utf8');
 
-        instagram_text = fs.readFileSync('instagram.txt', 'utf8');
+        instagram_text = fs.readFileSync('Instagram.md', 'utf8');
         instagram_text = instagram_text + footerdata;
         console.log('Instagram Message: ' + instagram_text)
 
-        facebook_text = fs.readFileSync('facebook.txt', 'utf8');
+        facebook_text = fs.readFileSync('Facebook.md', 'utf8');
         facebook_text = facebook_text + footerdata;
         console.log('Facebook Message: ' + facebook_text)
 
-        twitter_text = fs.readFileSync('twitter.txt', 'utf8');
+        twitter_text = fs.readFileSync('Twitter.md', 'utf8');
         twitter_text = twitter_text.substring(0, 160);
         console.log('Twitter Message: ' + twitter_text)
 

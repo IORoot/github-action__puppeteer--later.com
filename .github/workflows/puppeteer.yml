@@ -21,11 +21,39 @@ jobs:
     - name: Checkout this repo
       uses: actions/checkout@v2
 
-    - name: Checkout social-media repo
-      uses: actions/checkout@v2
+    # - name: Checkout social-media repo
+    #   uses: actions/checkout@v2
+    #   with:
+    #     repository: IORoot/n8n__social-media
+    #     path: posts
+
+    - name: Get Schedeule
+      uses: andymckay/get-gist-action@master
       with:
-        repository: IORoot/n8n__social-media
-        path: posts
+        gistURL: "https://gist.github.com/IORoot/44be37c3e8ca6c9a67882ecc79f856f5"
+
+    - name: Get Faceebook
+      uses: andymckay/get-gist-action@master
+      with:
+        gistURL: "https://gist.github.com/IORoot/e8a382f737e4458b1040d261cc680792"
+
+    - name: Get Instagram
+      uses: andymckay/get-gist-action@master
+      with:
+        gistURL: "https://gist.github.com/IORoot/5a07aa2c2f25e950abf99fba0e6549a3"
+
+    - name: Get Twitter
+      uses: andymckay/get-gist-action@master
+      with:
+        gistURL: "https://gist.github.com/IORoot/2cd2b9a3e10cae318c82c501f134151c"
+
+    - name: Get Footer
+      uses: andymckay/get-gist-action@master
+      with:
+        gistURL: "https://gist.github.com/IORoot/08d27c59ddfb77210c48e45ad9968886"
+
+
+
 
 
     - name: rclone download Media from GDrive
@@ -38,25 +66,24 @@ jobs:
 
     - name: Download Text, Schedules and set env
       run: |
-        mv ./posts/*.txt ./
-        echo "SCHEDULE=$(cat ./schedule.txt)" >> $GITHUB_ENV
+        echo "SCHEDULE=$(cat ./schedule.md)" >> $GITHUB_ENV
         sudo chown -f runner:docker *.*
         ls -la
 
 
-    - name: Install
-      uses: IORoot/action__puppeteer--media@master
-      with:
-        args: npm install
+    # - name: Install
+    #   uses: IORoot/action__puppeteer--media@master
+    #   with:
+    #     args: npm install
 
 
-    - name: Test Code
-      uses: IORoot/action__puppeteer--media@master
-      with:
-        args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video.mp4 ${{ env.SCHEDULE }}
+    # - name: Test Code
+    #   uses: IORoot/action__puppeteer--media@master
+    #   with:
+    #     args: node puppeteer.js ${{ secrets.LATER_USERNAME }} ${{ secrets.LATER_PASSWORD }} video.mp4 ${{ env.SCHEDULE }}
 
 
-    - uses: actions/upload-artifact@v2
-      with:
-        name: upload screenshot
-        path: ./screenshot*.png
+    # - uses: actions/upload-artifact@v2
+    #   with:
+    #     name: upload screenshot
+    #     path: ./screenshot*.png
