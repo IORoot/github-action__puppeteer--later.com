@@ -238,7 +238,7 @@ var runner = (function () {
              */
             try {
                 console.log('Selecting Facebook')
-                await page.click('.is--p__yellow.is--unselected .cCA--account__action--primary');
+                await page.click('.is--p__fbblue.is--unselected .cCA--account__action--primary');
             } catch (err) {
                 console.log('Not clicking on Facebook, already selected.');
             }
