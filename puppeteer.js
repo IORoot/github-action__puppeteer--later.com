@@ -204,7 +204,7 @@ var runner = (function () {
             /**
              * Wait for screenshot to upload
              */
-            try {
+            try { 
                 console.log('Waiting for upload to complete')
                 await page.setDefaultTimeout(0);
                 await page.waitForSelector('.cLIB--boardListContainer li:nth-child(1) .o--mediaContainer .o--media', {timeout: 0}).then(() => console.log('got it'));
