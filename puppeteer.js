@@ -192,7 +192,6 @@ var runner = (function () {
                 await page.setDefaultNavigationTimeout(0);
 
                 const [fileChooser] = await Promise.all([
-                    page.setDefaultNavigationTimeout(0),
                     page.waitForFileChooser(),
                     page.click('.cLIB--boardHeader > .cLIB--boardHeader__upload > .cUP--upload > .is--base > span'),
                 ]);
