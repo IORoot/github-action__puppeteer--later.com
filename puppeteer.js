@@ -189,13 +189,17 @@ var runner = (function () {
             try {
                 console.log('click upload button');
                 
+                await page.setDefaultNavigationTimeout(0);
+
                 const [fileChooser] = await Promise.all([
+                    page.setDefaultNavigationTimeout(0),
                     page.waitForFileChooser(),
                     page.click('.cLIB--boardHeader > .cLIB--boardHeader__upload > .cUP--upload > .is--base > span'),
                 ]);
                 console.log('Choose Media file: ' + mediafile);
                 await fileChooser.accept([mediafile]);
                 await page.waitForTimeout(3000);
+                await page.setDefaultNavigationTimeout(30000);
             } catch (err) {
                 console.log('Unable to upload media : ' + err);
                 return;
