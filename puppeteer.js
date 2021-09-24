@@ -188,13 +188,12 @@ var runner = (function () {
             // └──────────────────────────────────────────────────────────┘
             try {
                 console.log('click upload button');
-                
+                page.setDefaultTimeout(1000000);
                 const [fileChooser] = await Promise.all([
                     page.waitForFileChooser(),
                     page.click('.cLIB--boardHeader > .cLIB--boardHeader__upload > .cUP--upload > .is--base > span'),
                 ]);
                 console.log('Choose Media file: ' + mediafile);
-                page.setDefaultTimeout(0);
                 await fileChooser.accept([mediafile]);
                 await page.waitForTimeout(3000);
                 page.setDefaultTimeout(30000);
