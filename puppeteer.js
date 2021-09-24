@@ -175,7 +175,7 @@ var runner = (function () {
                 await page.click('.o--alertContainer button');
                 await page.waitForTimeout(1000);
             } catch (err) {
-                console.log('Unable to upload media : ' + err);
+                console.log('Unable to click annoying modals : ' + err);
                 return;
             }
 
@@ -188,7 +188,6 @@ var runner = (function () {
             // └──────────────────────────────────────────────────────────┘
             try {
                 console.log('click upload button');
-                page.setDefaultTimeout(1000000);
                 const [fileChooser] = await Promise.all([
                     page.waitForFileChooser(),
                     page.click('.cLIB--boardHeader > .cLIB--boardHeader__upload > .cUP--upload > .is--base > span'),
@@ -196,7 +195,6 @@ var runner = (function () {
                 console.log('Choose Media file: ' + mediafile);
                 await fileChooser.accept([mediafile]);
                 await page.waitForTimeout(3000);
-                page.setDefaultTimeout(30000);
             } catch (err) {
                 console.log('Unable to upload media : ' + err);
                 return;
@@ -208,8 +206,10 @@ var runner = (function () {
              */
             try {
                 console.log('Waiting for upload to complete')
-                await page.waitForSelector('.cLIB--boardListContainer li:nth-child(1) .o--mediaContainer .o--media').then(() => console.log('got it'));
+                await page.setDefaultTimeout(0);
+                await page.waitForSelector('.cLIB--boardListContainer li:nth-child(1) .o--mediaContainer .o--media', {timeout: 0}).then(() => console.log('got it'));
                 await page.waitForTimeout(100);
+                await page.setDefaultTimeout(30000);
             } catch (err) {
                 console.log('Wait for upload to complete timed out : ' + err);
                 return;
